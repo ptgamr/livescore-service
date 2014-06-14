@@ -46,6 +46,7 @@ exports.updateMatch = function(req, res){
 	var match = req.body;
 
 	match.status = parseInt(match.status);
+	match.id = parseInt(match.id);
 
 	var updated = false;
 
@@ -81,7 +82,8 @@ exports.insertGoal = function(req, res){
 
 	for (var i = 0 ; i < MATCHES.length; i++) {
 
-		console.log(MATCHES[i].home + " === " + goal.team + " : " + MATCHES[i].home === goal.team);
+		console.log('###Compare :' + MATCHES[i].home + " === " + goal.team + " : " + (MATCHES[i].home === goal.team));
+		console.log(MATCHES[i].id === parseInt(goal.matchId));
 		
 		if (MATCHES[i].id === parseInt(goal.matchId) && (MATCHES[i].home  ===goal.team || MATCHES[i].away === goal.team)) {
 			
