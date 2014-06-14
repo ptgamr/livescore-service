@@ -1,0 +1,73 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  span(style="color: red;") Message: #{message}
+  hr
+  form(name="insertGoal", action="/insertGoal", method="post")
+    h3 Insert Goal
+    p
+        label Match Id:
+        input(type="text", name="matchId")
+    p
+        label Team:
+        input(type="text", name="team")
+    p
+        label Player:
+        input(type="text", name="player")
+    p
+        label Minutes:
+        input(type="text", name="minutes")
+    p
+        label Own Goal:
+        input(type="checkbox", name="owngoal")
+    p
+        label Penalty:
+        input(type="checkbox", name="penalty")
+
+    button(type="submit") Insert
+  
+  hr
+  for match in matches
+    form(name="updateMatch", action="/updateMatch", method="post")
+        h3 #{match.home} - #{match.away}
+        p
+            label ID:
+            input(type="text", name="id", value="#{match.id}")
+        p
+            label Time:
+            input(type="text", name="time", value="#{match.time}")
+        p
+            label Status:
+            input(type="text", name="status", value="#{match.status}")   
+        p
+            label Home:
+            input(type="text", name="home", value="#{match.home}")
+        p
+            label HomeAbb:
+            input(type="text", name="homeAbb", value="#{match.homeAbb}")
+        p
+            label Away:
+            input(type="text", name="away", value="#{match.away}")
+        p
+            label AwayAbb:
+            input(type="text", name="awayAbb", value="#{match.awayAbb}")
+        p
+            label Score:
+            strong #{match.homeScore} - #{match.awayScore}
+        p
+            label Goals:
+            for goal in match.goals
+                p ### #{goal.player} (#{goal.team} | #{goal.minutes} | owngoal: #{goal.owngoal} | penalty: #{goal.penalty} )
+
+        p
+            label Live:
+            input(type="text", name="live", value="#{match.live}")
+
+        p
+            label Channel:
+            input(type="text", name="channel", value="#{match.channel}")
+
+
+        button(type="submit") Update
